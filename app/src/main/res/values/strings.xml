@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AccessibilityService</string>
+    <string name="accessibility_service_description">抓取屏幕信息并自动跳转APP</string>
+    <string name="app_description">这个应用演示了Android无障碍服务的功能。启用无障碍服务后，它可以抓取屏幕控件信息并在控制台输出。注意：默认会尝试跳转到微信主页面。</string>
+    <string name="open_accessibility_settings">打开无障碍设置</string>
+</resources> 
