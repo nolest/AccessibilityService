@@ -28,6 +28,20 @@ app/
 build.gradle                         - 项目构建配置
 ```
 
+## 开发环境要求
+
+- Android Studio Chipmunk 2021.2.1 或更高版本
+- JDK 8 或更高版本
+- Android SDK:
+  - 编译SDK版本 (compileSdk): 33 (Android 13)
+  - 最低SDK版本 (minSdk): 24 (Android 7.0)
+  - 目标SDK版本 (targetSdk): 33 (Android 13)
+- Gradle 版本: 7.3.3
+- 依赖库:
+  - androidx.appcompat:appcompat:1.5.1
+  - com.google.android.material:material:1.7.0
+  - androidx.constraintlayout:constraintlayout:2.1.4
+
 ## 运行步骤
 
 1. **导入项目**
@@ -59,6 +73,19 @@ build.gradle                         - 项目构建配置
 - 如需修改目标应用，请在 `MyAccessibilityService.java` 文件中修改 `TARGET_PACKAGE` 常量
 - 为避免无限循环跳转，服务只会在首次启动时尝试跳转一次
 - 若有特殊需求，可通过修改 `onAccessibilityEvent()` 方法中的逻辑来实现
+
+## 常用热门应用包名
+
+如果想要修改跳转目标，可以将 `MyAccessibilityService.java` 文件中的 `TARGET_PACKAGE` 常量更改为以下热门应用之一：
+
+1. 微信：`com.tencent.mm`
+2. 抖音：`com.ss.android.ugc.aweme`
+3. 淘宝：`com.taobao.taobao`
+4. 支付宝：`com.eg.android.AlipayGphone`
+5. 哔哩哔哩：`tv.danmaku.bili`
+6. QQ：`com.tencent.mobileqq`
+
+使用方法：将 `private static final String TARGET_PACKAGE = "com.tencent.mm";` 中的包名替换为上述列表中的任一包名即可。
 
 ## 相关文件说明
 
