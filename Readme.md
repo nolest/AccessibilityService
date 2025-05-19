@@ -2,16 +2,30 @@
 
 本项目演示了如何实现一个简单的 Android 无障碍服务（AccessibilityService），用于抓取屏幕控件信息并自动跳转到微信主页面。
 
-## 目录结构
+## 项目特点
+
+1. **抓取屏幕控件信息**：自动遍历并打印当前屏幕上的所有UI元素及其属性
+2. **智能跳转**：可以自动检测并跳转到微信（可根据需要修改目标应用）
+3. **避免循环跳转**：通过状态跟踪避免无限循环跳转的问题
+
+## 项目结构
 
 ```
-AndroidManifest.xml
-MyAccessibilityService.java
-res/
-  values/
-    strings.xml
-  xml/
-    accessibility_service_config.xml
+app/
+  src/
+    main/
+      java/com/example/accessibilityservice/
+        MainActivity.java            - 应用主界面
+        MyAccessibilityService.java  - 无障碍服务实现
+      res/
+        layout/
+          activity_main.xml          - 主界面布局
+        values/
+          strings.xml                - 字符串资源
+        xml/
+          accessibility_service_config.xml - 无障碍服务配置
+      AndroidManifest.xml            - 应用清单
+build.gradle                         - 项目构建配置
 ```
 
 ## 运行步骤
@@ -20,37 +34,31 @@ res/
 
    使用 Android Studio 打开本项目文件夹。
 
-2. **配置包名**
+2. **编译并安装 APK**
 
-   确认 `AndroidManifest.xml` 和 `MyAccessibilityService.java` 中的包名一致（默认为 `com.example.accessibilityservice`）。
-
-3. **连接设备**
-
-   使用 USB 数据线连接 Android 设备，并确保已开启开发者选项和 USB 调试。
-
-4. **编译并安装 APK**
-
-   在 Android Studio 中点击“运行”按钮，或使用命令行：
+   在 Android Studio 中点击"运行"按钮，或使用命令行：
 
    ```sh
    ./gradlew installDebug
    ```
 
-5. **开启无障碍服务**
+3. **开启无障碍服务**
 
-   - 在设备上打开“设置” > “无障碍” > 找到“AccessibilityDemo”服务。
-   - 点击进入并开启该服务。
+   - 打开应用，点击"打开无障碍设置"按钮
+   - 在系统设置中找到"AccessibilityService"服务
+   - 点击进入并开启该服务
 
-6. **测试功能**
+4. **测试功能**
 
-   - 开启服务后，切换到任意界面，服务会自动抓取当前屏幕控件信息并输出到 Logcat（标签为 `MyAccessibilityService`）。
-   - 当窗口状态发生变化时，服务会自动跳转到微信主页面（需已安装微信）。
+   - 开启服务后，服务会自动尝试跳转到微信主页面（需已安装微信）
+   - 所有屏幕控件信息会输出到 Logcat（过滤标签: `MyAccessibilityService`）
 
 ## 注意事项
 
-- 需确保设备已安装微信（包名为 `com.tencent.mm`），否则跳转无效。
-- 若未在“无障碍”设置中看到服务，请确认 APK 已正确安装且权限配置无误。
-- 日志信息可通过 Android Studio 的 Logcat 查看。
+- 需确保设备已安装微信（包名为 `com.tencent.mm`），否则跳转无效
+- 如需修改目标应用，请在 `MyAccessibilityService.java` 文件中修改 `TARGET_PACKAGE` 常量
+- 为避免无限循环跳转，服务只会在首次启动时尝试跳转一次
+- 若有特殊需求，可通过修改 `onAccessibilityEvent()` 方法中的逻辑来实现
 
 ## 相关文件说明
 
