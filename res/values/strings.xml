@@ -1,0 +1,3 @@
+<resources>
+    <string name="accessibility_service_description">抓取屏幕信息并自动跳转APP</string>
+</resources>
